@@ -7,6 +7,7 @@ import Kalend, { CalendarEvent, CalendarView, OnEventDragFinish } from 'kalend'
 import 'kalend/dist/styles/index.css';
 import { ListDeEventosState } from '../../state/atom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import useAtualizarEventos from '../../state/hooks/useAtualizarEvento';
 
 interface IKalendEvento {
   id?: number
@@ -20,7 +21,7 @@ const Calendario= () => {
 
   const eventosKalend = new Map<string, IKalendEvento[]>();
   const eventos= useRecoilValue(ListDeEventosState); 
-
+  const atualisarEvento = useAtualizarEventos();
 
   eventos.forEach(evento => {
     const chave = evento.inicio.toISOString().slice(0, 10)
@@ -48,10 +49,7 @@ const Calendario= () => {
       eventoAtualizado.inicio = new Date(kalendEventoAtualisado.startAt);
       eventoAtualizado.inicio = new Date(kalendEventoAtualisado.endAt);
 
-      setListaDeEventos(listaAtiga => {
-        const indice = listaAtiga.findIndex(evt => evt.id === evento.id);
-        return[...listaAtiga.slice(0, indice), eventoAtualizado, ...listaAtiga.slice(indice + 1)]
-      });
+      atualisarEvento(eventoAtualizado);
     }
   };
 
