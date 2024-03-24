@@ -1,16 +1,12 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
 import { IEvento } from '../../interfaces/IEvento'
-import { ListDeEventosState } from '../../state/atom';
+import useDeletarEvento from '../../state/hooks/useDeletarEvento';
 import style from './Evento.module.scss';
 import EventoCheckbox from './EventoCheckbox';
-import useDeletarEvento from '../../state/hooks/useDeletarEvento';
 
 const Evento: React.FC<{ evento: IEvento }> = ({ evento }) => {
 
-  const setListaDeEventos = useSetRecoilState<IEvento[]>(ListDeEventosState)
-
-  const excluirEvento = useDeletarEvento();
+  const excluirEvento = useDeletarEvento()
 
   const estilos = [
     style.Evento
