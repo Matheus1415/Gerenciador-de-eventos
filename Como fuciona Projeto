@@ -1,0 +1,5 @@
+App =  npm start
+API = json-server --watch db.json -p 8080
+
+Instalção do server
+npm install -g json-server    

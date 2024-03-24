@@ -4,10 +4,12 @@ import Formulario from './components/Formulario';
 import Calendario from './components/Calendario';
 import ListaDeEventos from './components/ListaDeEventos';
 import { RecoilRoot } from 'recoil'
+import { Suspense } from 'react';
 
 function App() {
   return (
     <RecoilRoot>
+      <Suspense fallback="Está arregando">
       <div className={style.App}>
         <div className={style.Coluna}>
           <Card>
@@ -22,6 +24,7 @@ function App() {
           <Calendario />
         </div>
       </div>
+      </Suspense>
     </RecoilRoot>
   );
 }
